@@ -1,58 +1,78 @@
-🧩 1. Crear carpeta del proyecto
+🧩 GUÍA DE CREACIÓN DEL PROYECTO DJANGO: UIII_Eventos_0301
+🚀 1. Crear y abrir el proyecto
+# Crear carpeta del proyecto
 mkdir UIII_Eventos_0301
 cd UIII_Eventos_0301
 
-💻 2. Abrir VS Code sobre la carpeta
+
+💻 Abrir Visual Studio Code
+
 code .
 
-🧮 3. Abrir terminal en VS Code
+🧮 2. Abrir la terminal en VS Code
 
 Menú → Ver → Terminal
 
-O presionar: Ctrl + ñ (Windows) o Ctrl + ` (Mac/Linux)
+O usa el atajo:
 
-🐍 4. Crear entorno virtual .venv
+Windows: Ctrl + ñ
+
+Mac/Linux: `Ctrl + ``
+
+🐍 3. Crear y activar entorno virtual
+# Crear entorno virtual
 python -m venv .venv
 
-▶️ 5. Activar entorno virtual
-En Windows:
+
+Activar entorno virtual:
+
+💻 En Windows:
+
 .venv\Scripts\activate
 
-En macOS/Linux:
+
+🍏 En macOS/Linux:
+
 source .venv/bin/activate
 
-⚙️ 6. Activar intérprete de Python en VS Code
+⚙️ 4. Configurar el intérprete de Python en VS Code
 
-Ctrl + Shift + P → escribir "Python: Select Interpreter"
+Presiona Ctrl + Shift + P
 
-Seleccionar el que diga .venv
+Escribe: Python: Select Interpreter
 
-📦 7. Instalar Django
+Selecciona el que diga .venv
+
+📦 5. Instalar Django
 pip install django
 
-🏗️ 8. Crear proyecto Django sin duplicar carpeta
+🏗️ 6. Crear el proyecto principal
 django-admin startproject backend_eventos .
 
-🚀 9. Ejecutar servidor en el puerto 8026
+
+(El punto evita que se duplique la carpeta.)
+
+🌍 7. Ejecutar el servidor
 python manage.py runserver 8026
 
-🌐 10. Copiar y pegar el link en el navegador
-http://127.0.0.1:8026/
 
-🧱 11. Crear aplicación app_eventos
+🌐 Abre en tu navegador:
+👉 http://127.0.0.1:8026/
+
+🧱 8. Crear la aplicación
 python manage.py startapp app_eventos
 
-🧬 12. Modelo models.py
+🧬 9. Crear el modelo en models.py
 
-(Ya lo tienes bien definido, lo mantenemos igual.)
+Tu modelo Servicio (y otros, si los tienes) ya están definidos.
+Luego, realiza las migraciones:
 
-⚙️ 12.5 Realizar migraciones
 python manage.py makemigrations
 python manage.py migrate
 
-🧭 13–14. Trabajar con modelo Servicio y crear funciones en views.py
+🧭 10. Crear las vistas (views.py)
 
-Archivo: app_eventos/views.py
+Ruta: app_eventos/views.py
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Servicio
@@ -100,7 +120,10 @@ def borrar_servicio(request, id):
     servicio.delete()
     return redirect('ver_servicio')
 
-🧩 15–22. Crear estructura de carpetas y archivos HTML
+🧩 11. Crear estructura de plantillas HTML
+
+Ruta:
+
 app_eventos/
 │
 ├── templates/
@@ -116,9 +139,12 @@ app_eventos/
 │       └── borrar_servicio.html
 
 
-Cada HTML usa colores suaves, Bootstrap y estructura moderna.
+🎨 Usa Bootstrap 5, fondos suaves, tipografía moderna y una interfaz clara.
 
-🌍 24. Crear archivo urls.py en app_eventos
+🌐 12. Configurar las rutas (urls)
+
+📁 Archivo: app_eventos/urls.py
+
 from django.urls import path
 from . import views
 
@@ -131,7 +157,7 @@ urlpatterns = [
     path('servicio/borrar/<int:id>/', views.borrar_servicio, name='borrar_servicio'),
 ]
 
-⚙️ 25. Agregar app_eventos en settings.py
+⚙️ 13. Registrar la app en settings.py
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -142,7 +168,7 @@ INSTALLED_APPS = [
     'app_eventos',
 ]
 
-🌐 26. Configurar backend_eventos/urls.py
+🌎 14. Configurar backend_eventos/urls.py
 from django.contrib import admin
 from django.urls import path, include
 
@@ -151,7 +177,7 @@ urlpatterns = [
     path('', include('app_eventos.urls')),
 ]
 
-🗃️ 27. Registrar modelos en admin.py
+🗃️ 15. Registrar los modelos en admin.py
 from django.contrib import admin
 from .models import Servicio, Evento, Empleado
 
@@ -160,19 +186,25 @@ admin.site.register(Evento)
 admin.site.register(Empleado)
 
 
-Luego, volver a ejecutar:
+Luego, ejecuta nuevamente:
 
 python manage.py makemigrations
 python manage.py migrate
 
-🎨 28–30. Colores suaves y diseño limpio
+🎨 16. Estilo y diseño
 
-Usar Bootstrap 5, fondos claros, y fuentes elegantes.
+Utiliza Bootstrap 5 con colores suaves y un estilo limpio.
+💡 Puedes basarte en la paleta:
 
-🚀 31. Ejecutar servidor en puerto 8026
+Fondo: #f8f9fa
+
+Acentos: #6c757d, #0d6efd
+
+Fuentes modernas (ej. Poppins, Inter)
+
+🚀 17. Ejecutar el servidor final
 python manage.py runserver 8026
 
 
-Abrir en el navegador:
-
-http://127.0.0.1:8026/
+Abre tu navegador en:
+👉 http://127.0.0.1:8026/
