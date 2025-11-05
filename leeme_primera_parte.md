@@ -1,78 +1,123 @@
-🧩 GUÍA DE CREACIÓN DEL PROYECTO DJANGO: UIII_Eventos_0301
-🚀 1. Crear y abrir el proyecto
-# Crear carpeta del proyecto
+# 🎯 Práctica 3: Aplicación Web de Gestión de Eventos (Proyecto Completo y Funcional)
+
+¡Bienvenido! En esta práctica crearás una aplicación web completa con Django para administrar servicios y eventos.
+Podrás agregar, visualizar, actualizar y eliminar servicios, con un diseño limpio, colores suaves y una estructura profesional.
+
+## 🧰 Tecnologías y Requisitos
+Herramienta	Descripción
+🐍 Python	3.8 o superior
+🌐 Django	Framework web principal
+💻 Editor	Visual Studio Code (recomendado)
+💾 Base de Datos	SQLite3 (por defecto)
+🎨 Diseño	Bootstrap 5, colores suaves
+📁 Estructura Final del Proyecto
+UIII_Eventos_0301/
+├── .venv/                   # Entorno virtual
+├── backend_eventos/         # Configuración del proyecto Django
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── app_eventos/             # Aplicación principal
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── templates/
+│   │   ├── base.html
+│   │   ├── header.html
+│   │   ├── navbar.html
+│   │   ├── footer.html
+│   │   ├── inicio.html
+│   │   └── servicio/
+│   │       ├── agregar_servicio.html
+│   │       ├── ver_servicio.html
+│   │       ├── actualizar_servicio.html
+│   │       └── borrar_servicio.html
+│   └── static/
+│       └── css/
+│           └── styles.css
+├── manage.py
+└── requirements.txt
+
+## ⚙️ Paso 1: Crear y Configurar el Proyecto
+🧩 Crear carpeta y abrir en VS Code
 mkdir UIII_Eventos_0301
 cd UIII_Eventos_0301
-
-
-💻 Abrir Visual Studio Code
-
 code .
 
-🧮 2. Abrir la terminal en VS Code
+💻 Abrir la terminal en VS Code
 
 Menú → Ver → Terminal
 
-O usa el atajo:
+Atajo:
 
 Windows: Ctrl + ñ
 
-Mac/Linux: `Ctrl + ``
+macOS/Linux: `Ctrl + ``
 
-🐍 3. Crear y activar entorno virtual
-# Crear entorno virtual
+## 🐍 Paso 2: Crear y Activar el Entorno Virtual
 python -m venv .venv
 
 
 Activar entorno virtual:
 
-💻 En Windows:
+💻 Windows:
 
 .venv\Scripts\activate
 
 
-🍏 En macOS/Linux:
+🍏 macOS/Linux:
 
 source .venv/bin/activate
 
-⚙️ 4. Configurar el intérprete de Python en VS Code
-
-Presiona Ctrl + Shift + P
-
-Escribe: Python: Select Interpreter
-
-Selecciona el que diga .venv
-
-📦 5. Instalar Django
+## 📦 Paso 3: Instalar Django
 pip install django
 
-🏗️ 6. Crear el proyecto principal
+🏗️ Paso 4: Crear el Proyecto Principal
 django-admin startproject backend_eventos .
 
 
-(El punto evita que se duplique la carpeta.)
+⚠️ El punto (.) evita que se duplique la carpeta.
 
-🌍 7. Ejecutar el servidor
+## 🌍 Paso 5: Ejecutar el Servidor
 python manage.py runserver 8026
 
 
-🌐 Abre en tu navegador:
-👉 http://127.0.0.1:8026/
+Abre tu navegador en 👉 http://127.0.0.1:8026/
 
-🧱 8. Crear la aplicación
+Si ves la página de Django, ¡todo está funcionando! ✅
+
+## 🧱 Paso 6: Crear la Aplicación
 python manage.py startapp app_eventos
 
-🧬 9. Crear el modelo en models.py
 
-Tu modelo Servicio (y otros, si los tienes) ya están definidos.
-Luego, realiza las migraciones:
+Agrega la app a INSTALLED_APPS en backend_eventos/settings.py:
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'app_eventos',
+]
+
+## 🧬 Paso 7: Modelos y Migraciones
+
+📄 Archivo: app_eventos/models.py
+(Asegúrate de tener tu modelo Servicio definido correctamente.)
+
+Aplica las migraciones:
 
 python manage.py makemigrations
 python manage.py migrate
 
-🧭 10. Crear las vistas (views.py)
+## 🧭 Paso 8: Vistas (views.py)
 
-Ruta: app_eventos/views.py
+📄 Archivo: app_eventos/views.py
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Servicio
@@ -120,30 +165,9 @@ def borrar_servicio(request, id):
     servicio.delete()
     return redirect('ver_servicio')
 
-🧩 11. Crear estructura de plantillas HTML
+## 🌐 Paso 9: Rutas (urls.py)
 
-Ruta:
-
-app_eventos/
-│
-├── templates/
-│   ├── base.html
-│   ├── header.html
-│   ├── navbar.html
-│   ├── footer.html
-│   ├── inicio.html
-│   └── servicio/
-│       ├── agregar_servicio.html
-│       ├── ver_servicio.html
-│       ├── actualizar_servicio.html
-│       └── borrar_servicio.html
-
-
-🎨 Usa Bootstrap 5, fondos suaves, tipografía moderna y una interfaz clara.
-
-🌐 12. Configurar las rutas (urls)
-
-📁 Archivo: app_eventos/urls.py
+📄 Archivo: app_eventos/urls.py
 
 from django.urls import path
 from . import views
@@ -157,18 +181,9 @@ urlpatterns = [
     path('servicio/borrar/<int:id>/', views.borrar_servicio, name='borrar_servicio'),
 ]
 
-⚙️ 13. Registrar la app en settings.py
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'app_eventos',
-]
 
-🌎 14. Configurar backend_eventos/urls.py
+📄 Archivo principal: backend_eventos/urls.py
+
 from django.contrib import admin
 from django.urls import path, include
 
@@ -177,7 +192,10 @@ urlpatterns = [
     path('', include('app_eventos.urls')),
 ]
 
-🗃️ 15. Registrar los modelos en admin.py
+## 🗃️ Paso 10: Registrar Modelos en el Panel de Administración
+
+📄 Archivo: app_eventos/admin.py
+
 from django.contrib import admin
 from .models import Servicio, Evento, Empleado
 
@@ -191,20 +209,37 @@ Luego, ejecuta nuevamente:
 python manage.py makemigrations
 python manage.py migrate
 
-🎨 16. Estilo y diseño
+## 🎨 Paso 11: Plantillas y Diseño
 
-Utiliza Bootstrap 5 con colores suaves y un estilo limpio.
-💡 Puedes basarte en la paleta:
+📁 Estructura:
+
+app_eventos/
+└── templates/
+    ├── base.html
+    ├── header.html
+    ├── navbar.html
+    ├── footer.html
+    ├── inicio.html
+    └── servicio/
+        ├── agregar_servicio.html
+        ├── ver_servicio.html
+        ├── actualizar_servicio.html
+        └── borrar_servicio.html
+
+
+💡 Diseño sugerido:
+
+Usa Bootstrap 5
 
 Fondo: #f8f9fa
 
-Acentos: #6c757d, #0d6efd
+Colores acento: #6c757d, #0d6efd
 
-Fuentes modernas (ej. Poppins, Inter)
+Fuente: Poppins o Inter
 
-🚀 17. Ejecutar el servidor final
+## 🚀 Paso 12: Ejecutar el Servidor Final
 python manage.py runserver 8026
 
 
-Abre tu navegador en:
+🌐 Abre tu navegador:
 👉 http://127.0.0.1:8026/
